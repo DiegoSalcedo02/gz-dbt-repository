@@ -53,3 +53,32 @@ sources:
             description: cost of preparing the parcel in the warehouse
           - name: ship_cost
             description: shipping cost paid by Greenweez to the carrier
+
+models:
+  - name: int_sales_margin
+    description: margin calcultation per order 
+    tests:
+      - unique:
+          column_name: "(orders_id || '-' || products_id)"
+      - not_null:
+          column_name:
+            - orders_id
+            - products_id
+            - margin
+            - Purchase_cost
+            - date_date
+            - revenue
+            - quantity
+    columns:
+      - name: order_id
+        description: primary key
+      - name: margin
+        description: Margin = Revenue - Purchase_cost
+      - name: Purchase_cost
+        description: Purchase_cost = Quantity * Purchase_price 
+      - name: date_date
+        description: date of the order
+      - name: revenue
+        description: sum of revenue per order 
+      - name: quantity
+        description: sum of quantity per order
